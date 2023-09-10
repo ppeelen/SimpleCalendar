@@ -25,6 +25,7 @@ can use it as well.
 
 <p align="center">
     <img src ="Resources/demo.gif" width="300" />
+    <img src ="Resources/demo_closure.gif" width="300" />
 </p>
 
 ## Installation
