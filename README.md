@@ -23,6 +23,10 @@ As its title suggests, it is meant to be a simple calendar.
 Originally built for the [Swift Island](https://github.com/SwiftIsland/app) app, this calendar has since been seperated to its own Github project so other 
 can use it as well.
 
+<p align="center">
+    <img src ="Resources/demo.gif" width="300" />
+</p>
+
 ## Installation
 
 Simple Calendar can be installed with the Swift Package Manager:
