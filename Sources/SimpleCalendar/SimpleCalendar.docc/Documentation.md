@@ -1,6 +1,6 @@
 # ``SimpleCalendar``
 
-``SimpleCalendar`` bring the use of a _simple calendar_ right into your app. There are no fancy sliders nor is its purpose to mimic Apple's Calendar app. 
+``SimpleCalendar`` brings the use of a _simple calendar_ right into your app. There are no fancy sliders nor is its purpose to mimic Apple's Calendar app. 
 As its title suggests, it is meant to be a simple calendar.
 
 @Metadata {
