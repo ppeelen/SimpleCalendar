@@ -7,17 +7,33 @@
 
 import Foundation
 
+/// EventRepresentable defines the content an "event" should have.
+///
+/// The default model Simple Calendar uses is ``Event``, but using ``EventRepresentable`` you could give your own model the same conformance without having to translate the models to ``Event``.
 public protocol EventRepresentable: Equatable {
-    var id: String { get }
-    var startDate: Date { get }
-    var activity: any ActivityRepresentable { get }
-    //    var duration: TimeInterval { get }
 
+    /// The event identifier
+    var id: String { get }
+
+    /// The start date and time of the event
+    var startDate: Date { get }
+
+    /// The ``Activity`` this event is representing
+    var activity: any ActivityRepresentable { get }
+
+    /// The coordinates of the event. Should only be set by Simple Calendar
     var coordinates: CGRect? { get set }
+
+    /// The horizontal column location of the event. Should only be set by Simple Calendar
     var column: Int { get set }
+
+    /// The total amount of columns available where this event is rendered. Should only be set by Simple Calendar.
     var columnCount: Int { get set }
 }
 
+/// This is the default model for an event.
+///
+/// An Event is an occurrence of an activity at a certain point in time. An event also contain logic for the positioning of the event inside the calendar.
 public struct Event: EventRepresentable {
     public let id: String
     public let startDate: Date
@@ -27,6 +43,11 @@ public struct Event: EventRepresentable {
     public var column: Int = 0
     public var columnCount: Int = 0
 
+    /// The Event initialiser
+    /// - Parameters:
+    ///   - id: The event identifier
+    ///   - startDate: The start date and time of the event
+    ///   - activity: The ``Activity`` this event is representing
     public init(
         id: String,
         startDate: Date,

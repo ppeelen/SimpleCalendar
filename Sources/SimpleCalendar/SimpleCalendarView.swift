@@ -14,6 +14,7 @@ public enum SelectionAction {
 }
 
 public struct SimpleCalendarView: View {
+    /// The events the calendar should show
     let events: [any EventRepresentable]
 
     @State private var visibleEvents: [any EventRepresentable]
@@ -23,6 +24,14 @@ public struct SimpleCalendarView: View {
     private let startHourOfDay: Int
     private let selectionAction: SelectionAction
 
+    /// Simple Calendar should be initialised with events. The remaining have a default value.
+    /// - Parameters:
+    ///   - events: The list of events that the calendar should show. Should be a list of ``EventRepresentable``, such as ``Event``.
+    ///   - selectedDate: The date the calendar show show, defaults to todays date
+    ///   - selectionAction: The action the calendar should perform when a user selects an event. Defaults to `.sheet`
+    ///   - hourHeight: The height for each hour label.  Defaults to `25.0`
+    ///   - hourSpacing: The vstack spacing between each hour label. Defaults to `24`
+    ///   - startHourOfDay: The first hour of the day to show. Defaults to `6` as 6 in the morning / 6 am
     public init(
         events: [any EventRepresentable],
         selectedDate: Date = Date(),

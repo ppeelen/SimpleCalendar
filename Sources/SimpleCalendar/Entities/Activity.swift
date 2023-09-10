@@ -6,15 +6,35 @@
 import Foundation
 import SwiftUI
 
+/// ActivityRepresentable defines theicontant of an activity
+///
+/// The default model Simple Calendar uses is ``Activity``, but using ``ActivityRepresentable`` you could give your own model the same conformance without having to translate
+/// any models to ``Activity``. An Activity can occur multiple times inside a calendar. E.g. if you have a workshop event that is repeated throughout multiple days, you create one activity and multiple events linking
+/// the same activity.
 public protocol ActivityRepresentable: Codable {
+
+    /// The Activity identifier
     var id: UUID { get }
+
+    /// The title of the activity. E.g. `Vision Pro workshop`
     var title: String { get }
+
+    /// Any description of the activity
     var description: String { get }
+
+    /// The mentors or hosts of the activity. E.g. if you have someone leading the activity`John Doe`
     var mentors: [String] { get }
+
+    /// The type of activity, defined by ``ActivityType``, giving the activity a color too.
     var type: ActivityType { get }
+
+    /// The duration of the activity in seconds.
     var duration: Double { get }
 }
 
+/// This defines the color and naming type of an activity.
+///
+/// It categorises an activity so the user can easier distinguish between each activity.
 public struct ActivityType: Codable {
     public let name: String
     public let color: Color
