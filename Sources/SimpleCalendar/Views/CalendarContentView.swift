@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct CalendarContentView: View {
+struct CalendarContentView: View {
     @Binding var events: [any EventRepresentable]
     let selectionAction: SelectionAction
 

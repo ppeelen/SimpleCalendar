@@ -33,7 +33,7 @@ public protocol EventRepresentable: Equatable {
 
 /// This is the default model for an event.
 ///
-/// An Event is an occurrence of an activity at a certain point in time. An event also contain logic for the positioning of the event inside the calendar.
+/// An Event is an occurrence of an ``Activity`` at a certain point in time. An event also contain logic for the positioning of the event inside the calendar.
 public struct Event: EventRepresentable {
     public let id: String
     public let startDate: Date

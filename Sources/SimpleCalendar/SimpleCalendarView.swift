@@ -5,14 +5,71 @@
 
 import SwiftUI
 
+/// Defines the type of action preformed on an event selection
 public enum SelectionAction {
+    /// Shows the Activity Sheet for Simple Calendar
+    ///
+    /// Example of implementation
+    /// ```swift
+    /// SimpleCalendarView(
+    ///     events: eventList,
+    ///     selectionAction: .sheet
+    /// )
+    /// ```
     case sheet
+    
+    /// Shows a custom `View` as a sheet
+    ///
+    /// Example of implementation
+    /// ```swift
+    /// SimpleCalendarView(
+    ///     events: eventList,
+    ///     selectionAction: .customSheet({ event in
+    ///           Text("An event was selected with id: \(event.id)")
+    ///     })
+    /// )
+    /// ```
     case customSheet((any EventRepresentable) -> any View)
+
+    /// Shows a destination view using `NavigationLink`
+    ///
+    /// Example of implementation
+    /// ```swift
+    /// SimpleCalendarView(
+    ///     events: eventList,
+    ///     selectionAction: .destination({ event in
+    ///           Text("An event was selected with id: \(event.id)")
+    ///     })
+    /// )
+    /// ```
     case destination((any EventRepresentable) -> any View)
+
+    /// Uses a closure to inform about the selection,
+    ///
+    /// Example of implementation
+    /// ```swift
+    /// SimpleCalendarView(
+    ///     events: eventList,
+    ///     selectionAction: .inform { event in
+    ///           debugPrint("An event was selected with id: \(event.id)")
+    ///     }
+    /// )
+    /// ```
     case inform((any EventRepresentable) -> Void)
+
+    /// Does nothing when the user selects an event
+    ///
+    /// Example of implementation
+    /// ```swift
+    /// SimpleCalendarView(
+    ///     events: eventList,
+    ///     selectionAction: .none
+    /// )
+    /// ```
     case none
 }
 
+/// A Simple Calendar view containing the events and activities send in
 public struct SimpleCalendarView: View {
     /// The events the calendar should show
     let events: [any EventRepresentable]

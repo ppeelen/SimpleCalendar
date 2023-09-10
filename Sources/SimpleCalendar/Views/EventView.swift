@@ -185,20 +185,3 @@ struct EventView_Previews: PreviewProvider {
         }
     }
 }
-
-//#Preview {
-//    SwiftUIView()
-//}
-
-public struct SheetContent<Content>: View where Content: View {
-    private var content: Content
-    
-    // Works OK
-    public init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
-    
-    public var body: some View {
-        content
-    }
-}

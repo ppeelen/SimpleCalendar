@@ -54,6 +54,9 @@ internal extension ActivityType {
     }
 }
 
+/// This is the default model for an activity
+///
+/// An Activity defines the item visible in the calendar which will be represented by an ``Event``.
 public struct Activity: ActivityRepresentable {
     public let id: UUID
     public let title: String
