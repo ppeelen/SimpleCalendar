@@ -40,7 +40,7 @@ jobs:
           $(xcrun --find docc) process-archive \
               transform-for-static-hosting .documentationArchive/Build/Products/Debug-iphoneos/SimpleCalendar.doccarchive \
               --output-path docs \
-              --hosting-base-path /SimpleCalendar
+              --hosting-base-path SimpleCalendar/docs/documentation/simplecalendar/
           
       - name: Commit changes
         run: |
