@@ -54,4 +54,4 @@ When the user selects an event in the calendar, Simple Calendar can either infor
 
 ## Documentation
 
-You can find the documentation here: [http://ppeelen.github.io/SimpleCalendar/](http://ppeelen.github.io/SimpleCalendar/)
+You can find the documentation here: [https://ppeelen.github.io/SimpleCalendar/docs/documentation/simplecalendar](https://ppeelen.github.io/SimpleCalendar/docs/documentation/simplecalendar)
