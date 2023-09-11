@@ -1,0 +1,50 @@
+name: Xcode - Build and Analyze
+
+on:
+  push:
+    branches: [ "main" ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and analyse default scheme using xcodebuild command
+    runs-on: macos-13
+
+    steps:
+      - name: "Select the last available Xcode"
+        uses: devbotsxyz/xcode-select@v1
+        
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          
+      - name: Update local branch
+        run: |
+          git fetch origin main		
+          git reset --hard origin/main
+        
+      - name: Build documentation
+        env:
+          scheme: ${{ 'default' }}
+        run: |
+          xcodebuild docbuild -scheme SimpleCalendar -destination 'generic/platform=ios' -derivedDataPath '.documentationArchive/'
+          
+      - name: Create web folder
+        run: |
+          $(xcrun --find docc) process-archive \
+              transform-for-static-hosting .documentationArchive/Build/Products/Debug-iphoneos/SimpleCalendar.doccarchive \
+              --output-path docs \
+              --hosting-base-path /SimpleCalendar
+          
+      - name: Commit changes
+        run: |
+          git add docs
+          git commit -m "Updated the documentation"
+          
+      - name: Push changes
+        run: |
+          git push --force
