@@ -14,8 +14,10 @@ jobs:
     runs-on: macos-13
 
     steps:
-      - name: "Select the last available Xcode"
-        uses: devbotsxyz/xcode-select@v1
+      - name: "Select the last available Xcode Beta"
+        uses: BoundfoxStudios/action-xcode-select@v1
+        with:
+          beta: true
         
       - name: Checkout
         uses: actions/checkout@v3
