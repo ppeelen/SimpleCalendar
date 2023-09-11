@@ -44,7 +44,3 @@ SimpleCalendarView(
     })
 )
 ```
-
-## Documentation
-
-You can find the documentation here: [http://ppeelen.github.io/SimpleCalendar/](http://ppeelen.github.io/SimpleCalendar/)

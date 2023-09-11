@@ -51,3 +51,7 @@ SimpleCalendarView(
 `eventList` in the example above is a list of `EventRepresentable` items; such as `Event`. See the example app for further examples.
 
 When the user selects an event in the calendar, Simple Calendar can either inform using a closure, show the default sheet, a custom sheet or move to a custom destination.
+
+## Documentation
+
+You can find the documentation here: [http://ppeelen.github.io/SimpleCalendar/](http://ppeelen.github.io/SimpleCalendar/)
