@@ -24,7 +24,7 @@ jobs:
           
       - name: Update local branch
         run: |
-          git fetch origin main		
+          git fetch origin main
           git reset --hard origin/main
         
       - name: Build documentation
