@@ -270,7 +270,7 @@ struct ScheduleView_Previews: PreviewProvider {
                 id: "1",
                 startDate: dateEvent1,
                 activity: CalendarActivity.forPreview(
-                    id: UUID(),
+                    id: UUID().uuidString,
                     type: ActivityType.forPreview(color: .yellow)
                 )
             ),
@@ -278,7 +278,7 @@ struct ScheduleView_Previews: PreviewProvider {
                 id: "2",
                 startDate: dateEvent2,
                 activity: CalendarActivity.forPreview(
-                    id: UUID(),
+                    id: UUID().uuidString,
                     type: ActivityType.forPreview(color: .blue), 
                     duration: 6 * (60 * 60)
                 )
@@ -287,7 +287,7 @@ struct ScheduleView_Previews: PreviewProvider {
                 id: "3",
                 startDate: dateEvent3,
                 activity: CalendarActivity.forPreview(
-                    id: UUID(),
+                    id: UUID().uuidString,
                     type: ActivityType.forPreview(color: .gray)
                 )
             ),
@@ -295,7 +295,7 @@ struct ScheduleView_Previews: PreviewProvider {
                 id: "4",
                 startDate: dateEvent4,
                 activity: CalendarActivity.forPreview(
-                    id: UUID(),
+                    id: UUID().uuidString,
                     type: ActivityType.forPreview(color: .red), 
                     duration: 45 * 60)
             ),
@@ -303,7 +303,7 @@ struct ScheduleView_Previews: PreviewProvider {
                 id: "5",
                 startDate: dateEvent5,
                 activity: CalendarActivity.forPreview(
-                    id: UUID(),
+                    id: UUID().uuidString,
                     type: ActivityType.forPreview(color: .yellow)
                 )
             ),
@@ -311,7 +311,7 @@ struct ScheduleView_Previews: PreviewProvider {
                 id: "6",
                 startDate: dateEvent6,
                 activity: CalendarActivity.forPreview(
-                    id: UUID(),
+                    id: UUID().uuidString,
                     type: ActivityType.forPreview(color: .purple)
                 )
             ),
@@ -319,7 +319,7 @@ struct ScheduleView_Previews: PreviewProvider {
                 id: "7",
                 startDate: dateEvent7,
                 activity: CalendarActivity.forPreview(
-                    id: UUID(),
+                    id: UUID().uuidString,
                     type: ActivityType.forPreview(color: .red)
                 )
             )
