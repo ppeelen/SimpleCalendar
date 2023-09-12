@@ -6,7 +6,7 @@
 import Foundation
 import SwiftUI
 
-/// CalendarActivityRepresentable defines the content of an activity
+/// CalendarActivityRepresentable defines the content of an calendarActivity
 ///
 /// The default model Simple Calendar uses is ``CalendarActivity``, but using ``CalendarActivityRepresentable`` you could give your own model the same conformance without having to translate
 /// any models to ``CalendarActivity``. An CalendarActivity can occur multiple times inside a calendar. E.g. if you have a workshop event that is repeated throughout multiple days, you create one activity and multiple events linking
@@ -32,9 +32,9 @@ public protocol CalendarActivityRepresentable: Codable {
     var duration: Double { get }
 }
 
-/// This defines the color and naming type of an activity.
+/// This defines the color and naming type of an calendarActivity.
 ///
-/// It categorises an activity so the user can easier distinguish between each activity.
+/// It categorises an calendarActivity so the user can easier distinguish between each calendarActivity.
 public struct ActivityType: Codable {
     public let name: String
     public let color: Color
@@ -80,11 +80,11 @@ extension CalendarActivity: Codable { }
 internal extension CalendarActivity {
     /// Only meant to be used for Preview purposes. Might change in the future.
     /// - Parameters:
-    ///   - id: The ID of the activity
+    ///   - id: The ID of the calendarActivity
     ///   - title: CalendarActivity title
     ///   - description: Activity description
     ///   - mentors: The ID's of the mentors for the activity. Can be an empty array if no Mentors are assigned
-    ///   - activityType: The ``ActivityType`` of the activity
+    ///   - activityType: The ``ActivityType`` of the calendarActivity
     ///   - duration: The duration of the activity in seconds
     /// - Returns: `CalendarActivity`
     static func forPreview(id: String = String(),

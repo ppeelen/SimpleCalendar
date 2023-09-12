@@ -13,15 +13,15 @@ struct EventDetailsView: View {
         VStack(alignment: .leading) {
             ZStack {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(event.activity.activityType.name)
+                    Text(event.calendarActivity.activityType.name)
                         .font(.caption)
-                        .foregroundColor(event.activity.activityType.color)
+                        .foregroundColor(event.calendarActivity.activityType.color)
                         .fontWeight(.light)
                     HStack {
                         Circle()
-                            .fill(event.activity.activityType.color)
+                            .fill(event.calendarActivity.activityType.color)
                             .frame(width: 7)
-                        Text(event.activity.title)
+                        Text(event.calendarActivity.title)
                             .font(.title)
                     }
                     .padding(.bottom, 8)
@@ -33,16 +33,16 @@ struct EventDetailsView: View {
                         Text(event.startDate.relativeDateDisplay())
                             .font(.caption)
                     }
-                    Text(event.activity.description)
+                    Text(event.calendarActivity.description)
                         .padding(.vertical, 20)
                         .font(.body)
                         .fontWeight(.light)
                         .dynamicTypeSize(DynamicTypeSize.small ... DynamicTypeSize.large)
-                    if !event.activity.mentors.isEmpty {
+                    if !event.calendarActivity.mentors.isEmpty {
                         Text("Mentors")
                             .font(.footnote)
                             .foregroundColor(.secondary)
-                        ForEach(event.activity.mentors, id: \.self) { mentor in
+                        ForEach(event.calendarActivity.mentors, id: \.self) { mentor in
                             Text(mentor)
                         }
                     }

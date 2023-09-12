@@ -19,7 +19,7 @@ public protocol CalendarEventRepresentable: Equatable {
     var startDate: Date { get }
 
     /// The ``Activity`` this event is representing
-    var activity: any CalendarActivityRepresentable { get }
+    var calendarActivity: any CalendarActivityRepresentable { get }
 
     /// The coordinates of the event. Should only be set by Simple Calendar
     var coordinates: CGRect? { get set }
@@ -37,7 +37,7 @@ public protocol CalendarEventRepresentable: Equatable {
 public struct CalendarEvent: CalendarEventRepresentable {
     public let id: String
     public let startDate: Date
-    public let activity: any CalendarActivityRepresentable
+    public let calendarActivity: any CalendarActivityRepresentable
 
     public var coordinates: CGRect?
     public var column: Int = 0
@@ -47,7 +47,7 @@ public struct CalendarEvent: CalendarEventRepresentable {
     /// - Parameters:
     ///   - id: The event identifier
     ///   - startDate: The start date and time of the event
-    ///   - activity: The ``CalendarActivity`` this event is representing
+    ///   - calendarActivity: The ``CalendarActivity`` this event is representing
     public init(
         id: String,
         startDate: Date,
@@ -55,7 +55,7 @@ public struct CalendarEvent: CalendarEventRepresentable {
     ) {
         self.id = id
         self.startDate = startDate
-        self.activity = activity
+        self.calendarActivity = activity
 
         self.coordinates = nil
         self.column = 0
@@ -70,7 +70,7 @@ internal extension CalendarEvent {
     ///   - id: The ID of the event
     ///   - startDate: The start time of the event as `Date`
     ///   - endDate: The end time of the event as `Date`
-    ///   - activity: The ``activity`` bound to the event
+    ///   - calendarActivity: The ``calendarActivity`` bound to the event
     ///   - duration: The duration of the event in seconds.
     /// - Returns: an ``CalendarEvent``
     static func forPreview(id: String = "1",

@@ -49,61 +49,61 @@ struct EventView: View {
     }
     
     private var content: some View {
-        let mainColor = event.activity.activityType.color
-        let endDate = event.startDate.addingTimeInterval(event.activity.duration)
+        let mainColor = event.calendarActivity.activityType.color
+        let endDate = event.startDate.addingTimeInterval(event.calendarActivity.duration)
         
         return VStack {
             VStack(alignment: .leading) {
-                if (event.activity.duration / 60) <= 30 {
+                if (event.calendarActivity.duration / 60) <= 30 {
                     if event.columnCount > 0 {
                         HStack(alignment: .center) {
-                            Text(event.activity.title)
+                            Text(event.calendarActivity.title)
                                 .foregroundColor(mainColor)
                                 .font(.caption)
                                 .padding(.top, 4)
                                 .fontWeight(.semibold)
                                 .dynamicTypeSize(.small ... .large)
                             Spacer()
-                            Text("\(event.startDate.formatted(date: .omitted, time: .shortened)), \(Int(event.activity.duration / 60)) min")
+                            Text("\(event.startDate.formatted(date: .omitted, time: .shortened)), \(Int(event.calendarActivity.duration / 60)) min")
                                 .foregroundColor(mainColor)
                                 .font(.caption2)
                                 .dynamicTypeSize(.small ... .large)
                         }
                     } else {
                         HStack(alignment: .center) {
-                            Text(event.activity.title)
+                            Text(event.calendarActivity.title)
                                 .foregroundColor(mainColor)
                                 .font(.caption)
                                 .padding(.top, 4)
                                 .fontWeight(.semibold)
                                 .dynamicTypeSize(.small ... .large)
                             Spacer()
-                            Text("\(event.startDate.formatted(date: .omitted, time: .shortened)) - \(endDate.formatted(date: .omitted, time: .shortened)), \(Int(event.activity.duration / 60)) min")
+                            Text("\(event.startDate.formatted(date: .omitted, time: .shortened)) - \(endDate.formatted(date: .omitted, time: .shortened)), \(Int(event.calendarActivity.duration / 60)) min")
                                 .foregroundColor(mainColor)
                                 .font(.caption2)
                                 .dynamicTypeSize(.small ... .large)
                         }
                     }
-                } else if (event.activity.duration / 60) <= 60 {
-                    Text(event.activity.title)
+                } else if (event.calendarActivity.duration / 60) <= 60 {
+                    Text(event.calendarActivity.title)
                         .foregroundColor(mainColor)
                         .font(.caption)
                         .padding(.top, 4)
                         .fontWeight(.semibold)
                         .dynamicTypeSize(.small ... .large)
                     if event.columnCount > 0 {
-                        Text("\(event.startDate.formatted(date: .omitted, time: .shortened)), \(Int(event.activity.duration / 60)) min")
+                        Text("\(event.startDate.formatted(date: .omitted, time: .shortened)), \(Int(event.calendarActivity.duration / 60)) min")
                             .foregroundColor(mainColor)
                             .font(.caption2)
                             .dynamicTypeSize(.small ... .large)
                     } else {
-                        Text("\(event.startDate.formatted(date: .omitted, time: .shortened)) - \(endDate.formatted(date: .omitted, time: .shortened)), \(Int(event.activity.duration / 60)) min")
+                        Text("\(event.startDate.formatted(date: .omitted, time: .shortened)) - \(endDate.formatted(date: .omitted, time: .shortened)), \(Int(event.calendarActivity.duration / 60)) min")
                             .foregroundColor(mainColor)
                             .font(.caption2)
                             .dynamicTypeSize(.small ... .large)
                     }
                 } else {
-                    Text(event.activity.title)
+                    Text(event.calendarActivity.title)
                         .foregroundColor(mainColor)
                         .font(.caption)
                         .padding(.top, 4)
@@ -113,7 +113,7 @@ struct EventView: View {
                         .foregroundColor(mainColor)
                         .font(.caption2)
                         .dynamicTypeSize(.small ... .large)
-                    Text("Duration: \(Int(event.activity.duration / 60)) min")
+                    Text("Duration: \(Int(event.calendarActivity.duration / 60)) min")
                         .foregroundColor(mainColor)
                         .font(.caption2)
                         .dynamicTypeSize(.small ... .large)

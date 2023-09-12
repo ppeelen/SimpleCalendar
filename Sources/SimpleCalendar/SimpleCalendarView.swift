@@ -195,7 +195,7 @@ public struct SimpleCalendarView: View {
         let calendar = Calendar.current
         let selectedEvents = events.filter {
             calendar.isDate($0.startDate, inSameDayAs: selectedDate)
-            || calendar.isDate($0.startDate.addingTimeInterval($0.activity.duration), inSameDayAs: selectedDate)
+            || calendar.isDate($0.startDate.addingTimeInterval($0.calendarActivity.duration), inSameDayAs: selectedDate)
         }
 
         calculateCoordinates(forEvents: selectedEvents)
@@ -211,7 +211,7 @@ public struct SimpleCalendarView: View {
 
         // Go over each event and check if there is another event ongoing at the same time
         events.forEach { event in
-            let activity = event.activity
+            let activity = event.calendarActivity
             var event = event
 
             let secondsSinceStartOfDay = abs(selectedDate.atHour(startHourOfDay)?.timeIntervalSince(event.startDate) ?? 0)
