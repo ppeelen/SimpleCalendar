@@ -90,7 +90,7 @@ public struct SimpleCalendarView: View {
     ///   - selectionAction: The action the calendar should perform when a user selects an event. Defaults to `.sheet`
     ///   - dateSelectionStyle: The type of date selection in the toolbar, default is `.datePicker`
     ///   - hourHeight: The height for each hour label.  Defaults to `25.0`
-    ///   - hourSpacing: The vstack spacing between each hour label. Defaults to `24`
+    ///   - hourSpacing: The vstack spacing between each hour label. Defaults to `24.0`
     ///   - startHourOfDay: The first hour of the day to show. Defaults to `6` as 6 in the morning / 6 am
     public init(
         events: Binding<[any CalendarEventRepresentable]>,
@@ -126,6 +126,7 @@ public struct SimpleCalendarView: View {
 
         return hours
     }
+    
     private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.setLocalizedDateFormatFromTemplate("MMMdd")
