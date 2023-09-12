@@ -13,13 +13,13 @@ struct EventDetailsView: View {
         VStack(alignment: .leading) {
             ZStack {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(event.activity.type.name)
+                    Text(event.activity.activityType.name)
                         .font(.caption)
-                        .foregroundColor(event.activity.type.color)
+                        .foregroundColor(event.activity.activityType.color)
                         .fontWeight(.light)
                     HStack {
                         Circle()
-                            .fill(event.activity.type.color)
+                            .fill(event.activity.activityType.color)
                             .frame(width: 7)
                         Text(event.activity.title)
                             .font(.title)

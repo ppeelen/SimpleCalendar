@@ -49,7 +49,7 @@ struct EventView: View {
     }
     
     private var content: some View {
-        let mainColor = event.activity.type.color
+        let mainColor = event.activity.activityType.color
         let endDate = event.startDate.addingTimeInterval(event.activity.duration)
         
         return VStack {

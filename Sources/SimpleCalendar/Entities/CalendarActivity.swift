@@ -12,22 +12,22 @@ import SwiftUI
 /// any models to ``CalendarActivity``. An CalendarActivity can occur multiple times inside a calendar. E.g. if you have a workshop event that is repeated throughout multiple days, you create one activity and multiple events linking
 /// the same activity.
 public protocol CalendarActivityRepresentable: Codable {
-    
+
     /// The Activity identifier
     var id: String { get }
-    
+
     /// The title of the activity. E.g. `Vision Pro workshop`
     var title: String { get }
-    
+
     /// Any description of the activity
     var description: String { get }
-    
+
     /// The mentors or hosts of the activity. E.g. if you have someone leading the activity`John Doe`
     var mentors: [String] { get }
-    
+
     /// The type of activity, defined by ``ActivityType``, giving the activity a color too.
-    var type: ActivityType { get }
-    
+    var activityType: ActivityType { get }
+
     /// The duration of the activity in seconds.
     var duration: Double { get }
 }
@@ -38,7 +38,7 @@ public protocol CalendarActivityRepresentable: Codable {
 public struct ActivityType: Codable {
     public let name: String
     public let color: Color
-    
+
     public init(name: String, color: Color) {
         self.name = name
         self.color = color
@@ -62,15 +62,15 @@ public struct CalendarActivity: CalendarActivityRepresentable {
     public let title: String
     public let description: String
     public let mentors: [String]
-    public let type: ActivityType
+    public let activityType: ActivityType
     public let duration: Double
-    
+
     public init(id: String, title: String, description: String, mentors: [String], type: ActivityType, duration: Double) {
         self.id = id
         self.title = title
         self.description = description
         self.mentors = mentors
-        self.type = type
+        self.activityType = type
         self.duration = duration
     }
 }
@@ -84,7 +84,7 @@ internal extension CalendarActivity {
     ///   - title: CalendarActivity title
     ///   - description: Activity description
     ///   - mentors: The ID's of the mentors for the activity. Can be an empty array if no Mentors are assigned
-    ///   - type: The ``ActivityType`` of the activity
+    ///   - activityType: The ``ActivityType`` of the activity
     ///   - duration: The duration of the activity in seconds
     /// - Returns: `CalendarActivity`
     static func forPreview(id: String = String(),
