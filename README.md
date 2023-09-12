@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/swift-5.9-orange.svg" alt="Swift 5.8" />
+    <img src="https://img.shields.io/badge/swift-5.8-orange.svg" alt="Swift 5.8" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <img src="https://img.shields.io/github/license/ppeelen/SimpleCalendar" alt="MIT License" />
     <img src="https://img.shields.io/github/v/release/ppeelen/SimpleCalendar" alt="Latest release" />
