@@ -57,6 +57,15 @@ struct ContentView: View {
                         Text("Selects a specific date as initial date, uses increased hour spacing and height and starts at the beginning of the day.")
                     }
                 }
+                NavigationLink {
+                    SelectiveDates()
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text("Selective dates")
+                            .font(.headline)
+                        Text("Allows the user to select a specific date.")
+                    }
+                }
             }
             .navigationTitle("Simple Calendar")
         }

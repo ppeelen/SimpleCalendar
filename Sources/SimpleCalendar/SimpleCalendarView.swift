@@ -80,12 +80,14 @@ public struct SimpleCalendarView: View {
     @State private var hourSpacing: Double
     private let startHourOfDay: Int
     private let selectionAction: SelectionAction
+    private let dateSelectionStyle: DateSelectionStyle
 
     /// Simple Calendar should be initialised with events. The remaining have a default value.
     /// - Parameters:
     ///   - events: The list of events that the calendar should show. Should be a list of ``EventRepresentable``, such as ``Event``.
     ///   - selectedDate: The date the calendar show show, defaults to todays date
     ///   - selectionAction: The action the calendar should perform when a user selects an event. Defaults to `.sheet`
+    ///   - dateSelectionStyle: The type of date selection in the toolbar, default is `.datePicker`
     ///   - hourHeight: The height for each hour label.  Defaults to `25.0`
     ///   - hourSpacing: The vstack spacing between each hour label. Defaults to `24`
     ///   - startHourOfDay: The first hour of the day to show. Defaults to `6` as 6 in the morning / 6 am
@@ -93,6 +95,7 @@ public struct SimpleCalendarView: View {
         events: [any EventRepresentable],
         selectedDate: Date = Date(),
         selectionAction: SelectionAction = .sheet,
+        dateSelectionStyle: DateSelectionStyle = .datePicker,
         hourHeight: Double = 25.0,
         hourSpacing: Double = 24.0,
         startHourOfDay: Int = 6
@@ -105,6 +108,7 @@ public struct SimpleCalendarView: View {
 
         self.startHourOfDay = startHourOfDay
         self.selectionAction = selectionAction
+        self.dateSelectionStyle = dateSelectionStyle
     }
 
     private var hours: [String] {
@@ -126,6 +130,15 @@ public struct SimpleCalendarView: View {
         dateFormatter.setLocalizedDateFormatFromTemplate("MMMdd")
         return dateFormatter
     }()
+
+    /// The date selection style added to the navigation bar
+    public enum DateSelectionStyle {
+        /// The system default date picker
+        case datePicker
+
+        /// A range of dates provided by the app
+        case selectedDates([Date])
+    }
 
     public var body: some View {
         ScrollView {
@@ -152,8 +165,21 @@ public struct SimpleCalendarView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    DatePicker("", selection: $selectedDate, displayedComponents: [.date])
-                        .labelsHidden()
+                    ZStack {
+                        switch dateSelectionStyle {
+                        case .datePicker:
+                            DatePicker("", selection: $selectedDate, displayedComponents: [.date])
+                                .labelsHidden()
+                        case .selectedDates(let dates):
+                            Picker(selection: $selectedDate) {
+                                ForEach(dates, id:\.self) { date in
+                                    Text(date, style: .date)
+                                }
+                            } label: {
+                                Text("")
+                            }
+                        }
+                    }
                 }
             }
         }
