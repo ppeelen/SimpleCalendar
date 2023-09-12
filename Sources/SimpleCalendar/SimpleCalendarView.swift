@@ -72,12 +72,13 @@ public enum SelectionAction {
 /// A Simple Calendar view containing the events and activities send in
 public struct SimpleCalendarView: View {
     /// The events the calendar should show
-    let events: [any CalendarEventRepresentable]
+    @Binding var events: [any CalendarEventRepresentable]
+    @Binding var selectedDate: Date
 
     @State private var visibleEvents: [any CalendarEventRepresentable]
-    @State private var selectedDate: Date
     @State private var hourHeight: Double
     @State private var hourSpacing: Double
+
     private let startHourOfDay: Int
     private let selectionAction: SelectionAction
     private let dateSelectionStyle: DateSelectionStyle
@@ -92,17 +93,17 @@ public struct SimpleCalendarView: View {
     ///   - hourSpacing: The vstack spacing between each hour label. Defaults to `24`
     ///   - startHourOfDay: The first hour of the day to show. Defaults to `6` as 6 in the morning / 6 am
     public init(
-        events: [any CalendarEventRepresentable],
-        selectedDate: Date = Date(),
+        events: Binding<[any CalendarEventRepresentable]>,
+        selectedDate: Binding<Date>,
         selectionAction: SelectionAction = .sheet,
         dateSelectionStyle: DateSelectionStyle = .datePicker,
         hourHeight: Double = 25.0,
         hourSpacing: Double = 24.0,
         startHourOfDay: Int = 6
     ) {
-        self.events = events
-        _visibleEvents = State(initialValue: events)
-        _selectedDate = State(initialValue: selectedDate)
+        _events = events
+        _selectedDate = selectedDate
+        _visibleEvents = State(initialValue: events.wrappedValue)
         _hourHeight = State(initialValue: hourHeight)
         _hourSpacing = State(initialValue: hourSpacing)
 
@@ -327,13 +328,21 @@ struct ScheduleView_Previews: PreviewProvider {
 
         return Group {
             NavigationStack {
-                SimpleCalendarView(events: events, selectionAction: .none)
+                SimpleCalendarView(
+                    events: .constant(events),
+                    selectedDate: .constant(Date()),
+                    selectionAction: .none
+                )
             }
             .previewDisplayName("Light")
             .preferredColorScheme(.light)
 
             NavigationStack {
-                SimpleCalendarView(events: events, selectionAction: .none)
+                SimpleCalendarView(
+                    events: .constant(events),
+                    selectedDate: .constant(Date()),
+                    selectionAction: .none
+                )
             }
             .previewDisplayName("Dark")
             .preferredColorScheme(.dark)
