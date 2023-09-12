@@ -7,10 +7,10 @@
 
 import Foundation
 
-/// EventRepresentable defines the content an "event" should have.
+/// CalendarEventRepresentable defines the content an "event" should have.
 ///
-/// The default model Simple Calendar uses is ``Event``, but using ``EventRepresentable`` you could give your own model the same conformance without having to translate the models to ``Event``.
-public protocol EventRepresentable: Equatable {
+/// The default model Simple Calendar uses is ``CalendarEvent``, but using ``CalendarEventRepresentable`` you could give your own model the same conformance without having to translate the models to ``CalendarEvent``.
+public protocol CalendarEventRepresentable: Equatable {
 
     /// The event identifier
     var id: String { get }
@@ -19,7 +19,7 @@ public protocol EventRepresentable: Equatable {
     var startDate: Date { get }
 
     /// The ``Activity`` this event is representing
-    var activity: any ActivityRepresentable { get }
+    var activity: any CalendarActivityRepresentable { get }
 
     /// The coordinates of the event. Should only be set by Simple Calendar
     var coordinates: CGRect? { get set }
@@ -33,25 +33,25 @@ public protocol EventRepresentable: Equatable {
 
 /// This is the default model for an event.
 ///
-/// An Event is an occurrence of an ``Activity`` at a certain point in time. An event also contain logic for the positioning of the event inside the calendar.
-public struct Event: EventRepresentable {
+/// An CalendarEvent is an occurrence of an ``CalendarActivity`` at a certain point in time. An event also contain logic for the positioning of the event inside the calendar.
+public struct CalendarEvent: CalendarEventRepresentable {
     public let id: String
     public let startDate: Date
-    public let activity: any ActivityRepresentable
+    public let activity: any CalendarActivityRepresentable
 
     public var coordinates: CGRect?
     public var column: Int = 0
     public var columnCount: Int = 0
 
-    /// The Event initialiser
+    /// The CalendarEvent initialiser
     /// - Parameters:
     ///   - id: The event identifier
     ///   - startDate: The start date and time of the event
-    ///   - activity: The ``Activity`` this event is representing
+    ///   - activity: The ``CalendarActivity`` this event is representing
     public init(
         id: String,
         startDate: Date,
-        activity: ActivityRepresentable
+        activity: CalendarActivityRepresentable
     ) {
         self.id = id
         self.startDate = startDate
@@ -63,7 +63,7 @@ public struct Event: EventRepresentable {
     }
 }
 
-internal extension Event {
+internal extension CalendarEvent {
     /// Only meant to be used for Preview purposes. Might change in the future.
     ///
     /// - Parameters:
@@ -72,11 +72,11 @@ internal extension Event {
     ///   - endDate: The end time of the event as `Date`
     ///   - activity: The ``activity`` bound to the event
     ///   - duration: The duration of the event in seconds.
-    /// - Returns: an ``Event``
+    /// - Returns: an ``CalendarEvent``
     static func forPreview(id: String = "1",
                            startDate: Date = Date(timeIntervalSinceNow: 60 * 60),
-                           activity: Activity = Activity.forPreview()) -> Event {
-        Event(
+                           activity: CalendarActivity = CalendarActivity.forPreview()) -> CalendarEvent {
+        CalendarEvent(
             id: id,
             startDate: startDate,
             activity: activity
@@ -84,9 +84,9 @@ internal extension Event {
     }
 }
 
-extension Event: Identifiable { }
-extension Event: Equatable {
-    public static func == (lhs: Event, rhs: Event) -> Bool {
+extension CalendarEvent: Identifiable { }
+extension CalendarEvent: Equatable {
+    public static func == (lhs: CalendarEvent, rhs: CalendarEvent) -> Bool {
         lhs.id == rhs.id
     }
 }

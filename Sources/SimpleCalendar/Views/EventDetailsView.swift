@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct EventDetailsView: View {
-    let event: any EventRepresentable
+    let event: any CalendarEventRepresentable
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -57,10 +57,10 @@ struct EventDetailsView: View {
 struct EventDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            EventDetailsView(event: Event.forPreview())
+            EventDetailsView(event: CalendarEvent.forPreview())
                 .previewDisplayName("Light")
                 .preferredColorScheme(.light)
-            EventDetailsView(event: Event.forPreview())
+            EventDetailsView(event: CalendarEvent.forPreview())
                 .previewDisplayName("Dark")
                 .preferredColorScheme(.dark)
         }

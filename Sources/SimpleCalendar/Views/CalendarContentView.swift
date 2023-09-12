@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct CalendarContentView: View {
-    @Binding var events: [any EventRepresentable]
+    @Binding var events: [any CalendarEventRepresentable]
     let selectionAction: SelectionAction
 
     private let leadingPadding = 70.0

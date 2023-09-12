@@ -29,7 +29,7 @@ public enum SelectionAction {
     ///     })
     /// )
     /// ```
-    case customSheet((any EventRepresentable) -> any View)
+    case customSheet((any CalendarEventRepresentable) -> any View)
 
     /// Shows a destination view using `NavigationLink`
     ///
@@ -42,7 +42,7 @@ public enum SelectionAction {
     ///     })
     /// )
     /// ```
-    case destination((any EventRepresentable) -> any View)
+    case destination((any CalendarEventRepresentable) -> any View)
 
     /// Uses a closure to inform about the selection,
     ///
@@ -55,7 +55,7 @@ public enum SelectionAction {
     ///     }
     /// )
     /// ```
-    case inform((any EventRepresentable) -> Void)
+    case inform((any CalendarEventRepresentable) -> Void)
 
     /// Does nothing when the user selects an event
     ///
@@ -72,9 +72,9 @@ public enum SelectionAction {
 /// A Simple Calendar view containing the events and activities send in
 public struct SimpleCalendarView: View {
     /// The events the calendar should show
-    let events: [any EventRepresentable]
+    let events: [any CalendarEventRepresentable]
 
-    @State private var visibleEvents: [any EventRepresentable]
+    @State private var visibleEvents: [any CalendarEventRepresentable]
     @State private var selectedDate: Date
     @State private var hourHeight: Double
     @State private var hourSpacing: Double
@@ -84,7 +84,7 @@ public struct SimpleCalendarView: View {
 
     /// Simple Calendar should be initialised with events. The remaining have a default value.
     /// - Parameters:
-    ///   - events: The list of events that the calendar should show. Should be a list of ``EventRepresentable``, such as ``Event``.
+    ///   - events: The list of events that the calendar should show. Should be a list of ``CalendarEventRepresentable``, such as ``CalendarEvent``.
     ///   - selectedDate: The date the calendar show show, defaults to todays date
     ///   - selectionAction: The action the calendar should perform when a user selects an event. Defaults to `.sheet`
     ///   - dateSelectionStyle: The type of date selection in the toolbar, default is `.datePicker`
@@ -92,7 +92,7 @@ public struct SimpleCalendarView: View {
     ///   - hourSpacing: The vstack spacing between each hour label. Defaults to `24`
     ///   - startHourOfDay: The first hour of the day to show. Defaults to `6` as 6 in the morning / 6 am
     public init(
-        events: [any EventRepresentable],
+        events: [any CalendarEventRepresentable],
         selectedDate: Date = Date(),
         selectionAction: SelectionAction = .sheet,
         dateSelectionStyle: DateSelectionStyle = .datePicker,
@@ -201,8 +201,8 @@ public struct SimpleCalendarView: View {
         calculateCoordinates(forEvents: selectedEvents)
     }
 
-    private func calculateCoordinates(forEvents events: [any EventRepresentable]) {
-        var eventList: [any EventRepresentable] = []
+    private func calculateCoordinates(forEvents events: [any CalendarEventRepresentable]) {
+        var eventList: [any CalendarEventRepresentable] = []
 
         var pos: [EventPositions] = []
 
@@ -243,7 +243,7 @@ public struct SimpleCalendarView: View {
         self.visibleEvents = eventList
     }
 
-    private func calculateOffset(event: Event) -> Double {
+    private func calculateOffset(event: CalendarEvent) -> Double {
         guard let startHour = event.startDate.hour, let dateHour = Date().atHour(startHour) else { return 0 }
 
         let actualHourHeight = hourHeight + hourSpacing
@@ -266,59 +266,59 @@ struct ScheduleView_Previews: PreviewProvider {
         // swiftlint:enable force_unwrapping
         
         let events = [
-            Event.forPreview(
+            CalendarEvent.forPreview(
                 id: "1",
                 startDate: dateEvent1,
-                activity: Activity.forPreview(
+                activity: CalendarActivity.forPreview(
                     id: UUID(),
                     type: ActivityType.forPreview(color: .yellow)
                 )
             ),
-            Event.forPreview(
+            CalendarEvent.forPreview(
                 id: "2",
                 startDate: dateEvent2,
-                activity: Activity.forPreview(
+                activity: CalendarActivity.forPreview(
                     id: UUID(),
                     type: ActivityType.forPreview(color: .blue), 
                     duration: 6 * (60 * 60)
                 )
             ),
-            Event.forPreview(
+            CalendarEvent.forPreview(
                 id: "3",
                 startDate: dateEvent3,
-                activity: Activity.forPreview(
+                activity: CalendarActivity.forPreview(
                     id: UUID(),
                     type: ActivityType.forPreview(color: .gray)
                 )
             ),
-            Event.forPreview(
+            CalendarEvent.forPreview(
                 id: "4",
                 startDate: dateEvent4,
-                activity: Activity.forPreview(
+                activity: CalendarActivity.forPreview(
                     id: UUID(),
                     type: ActivityType.forPreview(color: .red), 
                     duration: 45 * 60)
             ),
-            Event.forPreview(
+            CalendarEvent.forPreview(
                 id: "5",
                 startDate: dateEvent5,
-                activity: Activity.forPreview(
+                activity: CalendarActivity.forPreview(
                     id: UUID(),
                     type: ActivityType.forPreview(color: .yellow)
                 )
             ),
-            Event.forPreview(
+            CalendarEvent.forPreview(
                 id: "6",
                 startDate: dateEvent6,
-                activity: Activity.forPreview(
+                activity: CalendarActivity.forPreview(
                     id: UUID(),
                     type: ActivityType.forPreview(color: .purple)
                 )
             ),
-            Event.forPreview(
+            CalendarEvent.forPreview(
                 id: "7",
                 startDate: dateEvent7,
-                activity: Activity.forPreview(
+                activity: CalendarActivity.forPreview(
                     id: UUID(),
                     type: ActivityType.forPreview(color: .red)
                 )

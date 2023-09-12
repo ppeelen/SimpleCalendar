@@ -6,12 +6,12 @@
 import Foundation
 import SwiftUI
 
-/// ActivityRepresentable defines theicontant of an activity
+/// CalendarActivityRepresentable defines the content of an activity
 ///
-/// The default model Simple Calendar uses is ``Activity``, but using ``ActivityRepresentable`` you could give your own model the same conformance without having to translate
-/// any models to ``Activity``. An Activity can occur multiple times inside a calendar. E.g. if you have a workshop event that is repeated throughout multiple days, you create one activity and multiple events linking
+/// The default model Simple Calendar uses is ``CalendarActivity``, but using ``CalendarActivityRepresentable`` you could give your own model the same conformance without having to translate
+/// any models to ``CalendarActivity``. An CalendarActivity can occur multiple times inside a calendar. E.g. if you have a workshop event that is repeated throughout multiple days, you create one activity and multiple events linking
 /// the same activity.
-public protocol ActivityRepresentable: Codable {
+public protocol CalendarActivityRepresentable: Codable {
 
     /// The Activity identifier
     var id: UUID { get }
@@ -56,8 +56,8 @@ internal extension ActivityType {
 
 /// This is the default model for an activity
 ///
-/// An Activity defines the item visible in the calendar which will be represented by an ``Event``.
-public struct Activity: ActivityRepresentable {
+/// An CalendarActivity defines the item visible in the calendar which will be represented by an ``CalendarEvent``.
+public struct CalendarActivity: CalendarActivityRepresentable {
     public let id: UUID
     public let title: String
     public let description: String
@@ -75,25 +75,25 @@ public struct Activity: ActivityRepresentable {
     }
 }
 
-extension Activity: Codable { }
+extension CalendarActivity: Codable { }
 
-internal extension Activity {
+internal extension CalendarActivity {
     /// Only meant to be used for Preview purposes. Might change in the future.
     /// - Parameters:
     ///   - id: The ID of the activity
-    ///   - title: Activity title
+    ///   - title: CalendarActivity title
     ///   - description: Activity description
     ///   - mentors: The ID's of the mentors for the activity. Can be an empty array if no Mentors are assigned
     ///   - type: The ``ActivityType`` of the activity
     ///   - duration: The duration of the activity in seconds
-    /// - Returns: `Activity`
+    /// - Returns: `CalendarActivity`
     static func forPreview(id: UUID = UUID(),
                            title: String = "Lorum Ipsum",
                            description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum maximus quam, eget egestas nisi accumsan eget. Phasellus egestas tristique tortor, vel interdum lorem porta non.",
                            mentors: [String] = [],
                            type: ActivityType = ActivityType.forPreview(),
-                           duration: Double = 60 * 60) -> Activity {
-        Activity(id: id,
+                           duration: Double = 60 * 60) -> CalendarActivity {
+        CalendarActivity(id: id,
                  title: title,
                  description: description,
                  mentors: mentors,

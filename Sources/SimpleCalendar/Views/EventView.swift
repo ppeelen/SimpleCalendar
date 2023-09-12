@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventView: View {
-    let event: any EventRepresentable
+    let event: any CalendarEventRepresentable
     let selectionAction: SelectionAction
     
     // For opening Event details
@@ -149,13 +149,13 @@ struct EventView: View {
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        let activity15min = Activity.forPreview(duration: 60 * 15)
-        let activity30min = Activity.forPreview(duration: 60 * 30)
-        let activity60min = Activity.forPreview(duration: 60 * 60)
+        let activity15min = CalendarActivity.forPreview(duration: 60 * 15)
+        let activity30min = CalendarActivity.forPreview(duration: 60 * 30)
+        let activity60min = CalendarActivity.forPreview(duration: 60 * 60)
         
-        let event15 = Event.forPreview(activity: activity15min)
-        let event30 = Event.forPreview(activity: activity30min)
-        let event60 = Event.forPreview(activity: activity60min)
+        let event15 = CalendarEvent.forPreview(activity: activity15min)
+        let event30 = CalendarEvent.forPreview(activity: activity30min)
+        let event60 = CalendarEvent.forPreview(activity: activity60min)
         
         Group {
             EventView(event: event15, selectionAction: .none)
