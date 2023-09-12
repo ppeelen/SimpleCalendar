@@ -47,7 +47,3 @@ struct CalendarPageView_Previews: PreviewProvider {
         }
     }
 }
-
-//#Preview {
-//    SwiftUIView()
-//}

@@ -9,11 +9,14 @@ import SimpleCalendar
 struct ContentView: View {
     private let dataModel = DataModel()
 
+    @State private var events: [any CalendarEventRepresentable] = []
+    @State private var selectedDate = Date()
+
     var body: some View {
         NavigationStack {
             List {
                 NavigationLink {
-                    UsingSheet()
+                    UsingSheet(events: $events, selectedDate: $selectedDate)
                 } label: {
                     VStack(alignment: .leading) {
                         Text("Default sheet")
@@ -22,7 +25,7 @@ struct ContentView: View {
                     }
                 }
                 NavigationLink {
-                    UsingCustomSheet()
+                    UsingCustomSheet(events: $events, selectedDate: $selectedDate)
                 } label: {
                     VStack(alignment: .leading) {
                         Text("Using custom sheet")
@@ -31,7 +34,7 @@ struct ContentView: View {
                     }
                 }
                 NavigationLink {
-                    UsingDestination()
+                    UsingDestination(events: $events, selectedDate: $selectedDate)
                 } label: {
                     VStack(alignment: .leading) {
                         Text("Using destination")
@@ -40,7 +43,7 @@ struct ContentView: View {
                     }
                 }
                 NavigationLink {
-                    UsingClosure()
+                    UsingClosure(events: $events, selectedDate: $selectedDate)
                 } label: {
                     VStack(alignment: .leading) {
                         Text("Using closure")
@@ -49,7 +52,7 @@ struct ContentView: View {
                     }
                 }
                 NavigationLink {
-                    CustomSettings()
+                    CustomSettings(events: $events, selectedDate: $selectedDate)
                 } label: {
                     VStack(alignment: .leading) {
                         Text("Custom settings")
@@ -58,7 +61,7 @@ struct ContentView: View {
                     }
                 }
                 NavigationLink {
-                    SelectiveDates()
+                    SelectiveDates(events: $events, selectedDate: $selectedDate)
                 } label: {
                     VStack(alignment: .leading) {
                         Text("Selective dates")
@@ -69,9 +72,14 @@ struct ContentView: View {
             }
             .navigationTitle("Simple Calendar")
         }
+        .onAppear {
+            self.events = dataModel.getEvents()
+        }
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

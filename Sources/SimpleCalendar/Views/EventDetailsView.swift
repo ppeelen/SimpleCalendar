@@ -66,8 +66,3 @@ struct EventDetailsView_Previews: PreviewProvider {
         }
     }
 }
-
-
-//#Preview {
-//    SwiftUIView()
-//}

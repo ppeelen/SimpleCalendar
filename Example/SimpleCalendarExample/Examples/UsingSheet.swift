@@ -7,19 +7,17 @@ import SwiftUI
 import SimpleCalendar
 
 struct UsingSheet: View {
-    private let dataModel = DataModel()
-    
+    @Binding var events: [any CalendarEventRepresentable]
+    @Binding var selectedDate: Date
+
     var body: some View {
         NavigationStack {
             SimpleCalendarView(
-                events: dataModel.getEvents(),
+                events: $events,
+                selectedDate: $selectedDate,
                 selectionAction: .sheet
             )
             .navigationTitle("Using standard sheet")
         }
     }
-}
-
-#Preview {
-    UsingSheet()
 }

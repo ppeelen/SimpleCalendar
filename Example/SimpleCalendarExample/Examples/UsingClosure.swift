@@ -7,19 +7,20 @@ import SwiftUI
 import SimpleCalendar
 
 struct UsingClosure: View {
-    private let dataModel = DataModel()
+    @Binding var events: [any CalendarEventRepresentable]
+    @Binding var selectedDate: Date
 
-    @State private var selectedEvent: (any EventRepresentable)?
+    @State private var selectedEvent: (any CalendarEventRepresentable)?
 
     var body: some View {
         NavigationStack {
             if let selectedEvent {
-                Text("**\(selectedEvent.activity.title)**, \(selectedEvent.startDate.relativeDateDisplay())")
+                Text("**\(selectedEvent.calendarActivity.title)**, \(selectedEvent.startDate.relativeDateDisplay())")
                     .padding()
                     .font(.caption)
                     .background(
                         RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .fill(selectedEvent.activity.type.color.opacity(0.3))
+                            .fill(selectedEvent.calendarActivity.activityType.color.opacity(0.3))
                     )
             } else {
                 Text("No event selected")
@@ -32,7 +33,8 @@ struct UsingClosure: View {
             }
 
             SimpleCalendarView(
-                events: dataModel.getEvents(),
+                events: $events,
+                selectedDate: $selectedDate,
                 selectionAction: .inform { event in
                     self.selectedEvent = event
                 }
@@ -40,10 +42,6 @@ struct UsingClosure: View {
             .navigationTitle("Using closure")
         }
     }
-}
-
-#Preview {
-    UsingClosure()
 }
 
 private extension Date {

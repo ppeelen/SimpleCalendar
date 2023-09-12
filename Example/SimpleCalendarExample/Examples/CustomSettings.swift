@@ -7,13 +7,14 @@ import SwiftUI
 import SimpleCalendar
 
 struct CustomSettings: View {
-    private let dataModel = DataModel()
+    @Binding var events: [any CalendarEventRepresentable]
+    @Binding var selectedDate: Date
 
     var body: some View {
         NavigationStack {
             SimpleCalendarView(
-                events: dataModel.getEvents(),
-                selectedDate: Date(timeIntervalSinceNow: (24 * 3600) * 10),
+                events: $events,
+                selectedDate: $selectedDate,
                 selectionAction: .none,
                 hourHeight: 50,
                 hourSpacing: 48,
@@ -21,9 +22,8 @@ struct CustomSettings: View {
             )
             .navigationTitle("+10 days from now")
         }
+        .onAppear {
+            selectedDate = Date(timeIntervalSinceNow: (24 * 3600) * 10)
+        }
     }
-}
-
-#Preview {
-    CustomSettings()
 }

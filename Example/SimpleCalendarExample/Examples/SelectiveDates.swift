@@ -7,7 +7,8 @@ import SwiftUI
 import SimpleCalendar
 
 struct SelectiveDates: View {
-    private let dataModel = DataModel()
+    @Binding var events: [any CalendarEventRepresentable]
+    @Binding var selectedDate: Date
 
     var body: some View {
         let day: Double = (60 * 60) * 24
@@ -20,8 +21,8 @@ struct SelectiveDates: View {
 
         NavigationStack {
             SimpleCalendarView(
-                events: dataModel.getEvents(),
-                selectedDate: Date(timeIntervalSinceNow: (24 * 3600) * 10),
+                events: $events,
+                selectedDate: $selectedDate,
                 selectionAction: .none,
                 dateSelectionStyle: .selectedDates(availableDates),
                 hourHeight: 50,
@@ -30,9 +31,8 @@ struct SelectiveDates: View {
             )
             .navigationTitle("+10 days from now")
         }
+        .onAppear {
+            selectedDate = Date(timeIntervalSinceNow: (24 * 3600) * 10)
+        }
     }
-}
-
-#Preview {
-    SelectiveDates()
 }

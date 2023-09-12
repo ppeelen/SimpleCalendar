@@ -7,12 +7,14 @@ import SwiftUI
 import SimpleCalendar
 
 struct UsingDestination: View {
-    private let dataModel = DataModel()
+    @Binding var events: [any CalendarEventRepresentable]
+    @Binding var selectedDate: Date
 
     var body: some View {
         NavigationStack {
             SimpleCalendarView(
-                events: dataModel.getEvents(),
+                events: $events,
+                selectedDate: $selectedDate,
                 selectionAction: .destination({ event in
                     CustomSheetContentView(event: event)
                 })
@@ -22,17 +24,13 @@ struct UsingDestination: View {
     }
 }
 
-#Preview {
-    UsingCustomSheet()
-}
-
 private struct CustomSheetContentView: View {
-    let event: any EventRepresentable
+    let event: any CalendarEventRepresentable
 
     var body: some View {
         VStack {
             Text("Selected Event")
-            Text(event.activity.title)
+            Text(event.calendarActivity.title)
         }
     }
 }
